@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="assets/images/favicon.ico" />
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
   <div class="container-scroller">
@@ -298,6 +299,9 @@
           </li>
         </ul>
       </nav>
+
+
+
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -574,6 +578,36 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="assets/js/dashboard.js"></script>
+
+<!-- Custom Data Table Loader -->
+<script>
+  fetch('assets/data/ccdm_sorted_for_visuals.csv')
+    .then(response => response.text())
+    .then(data => {
+      const rows = data.trim().split('\n').slice(1); // skip header
+      const tableBody = document.querySelector('#opportunity-table tbody');
+
+      rows.slice(0, 10).forEach(row => {
+        const cols = row.split(',');
+        const market = cols[0];
+        const city = cols[1];
+        const available = parseFloat(cols[6]).toLocaleString(); // available_space_avail
+        const leased = parseFloat(cols[7]).toLocaleString();    // available_space_lease
+        const delta = (parseFloat(cols[6]) - parseFloat(cols[7])).toLocaleString();
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${market}</td>
+          <td>${city}</td>
+          <td>${available}</td>
+          <td>${leased}</td>
+          <td>${delta}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    })
+    .catch(err => console.error('Error loading CSV:', err));
+</script>
   <!-- End custom js for this page-->
 </body>
 

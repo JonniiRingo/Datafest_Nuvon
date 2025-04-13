@@ -554,85 +554,43 @@
     }
     
     if ($("#sales-chart-d").length) {
-      const ctx = document.getElementById('sales-chart-d');
+      const ctx = document.getElementById("sales-chart-d").getContext("2d");
+    
+      const cities = ["New York", "Houston", "Stafford", "Austin", "Thousand Oaks", "Agoura Hills", "Diamond Bar", "Kingwood", "Van Nuys", "Westlake Village"];
+      const opportunities = [1.45e11, 1.36e11, 1.2e10, 1.1e10, 1.08e10, 1.02e10, 9.9e9, 9.6e9, 9.2e9, 8.7e9];
+    
       new Chart(ctx, {
         type: 'bar',
         data: {
-					labels: ["2014", "2015", "2016", "2017", "2018", "2019"],
-          datasets: [
-            {
-              label: 'Offline Sales',
-              data: [52, 40, 33, 45, 22, 50],
-              backgroundColor: '#a43cda',
-              barPercentage: .3,
-            },
-            {
-              label: 'Online Sales',
-              data: [22, 45, 23, 50, 15, 40],
-              backgroundColor: '#f39915',
-              barPercentage: .3
-            }
-          ]
+          labels: cities,
+          datasets: [{
+            label: 'Opportunity Gap (Available - Leased)',
+            data: opportunities,
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            barPercentage: 0.6
+          }]
         },
-				options: {
+        options: {
+          indexAxis: 'y',
           responsive: true,
-          maintainAspectRatio: true,
-          elements: {
-            line: {
-                tension: .4,
-            }
-          },
+          maintainAspectRatio: false,
           scales: {
             x: {
-              border: {
-                display: false
-              },
-              grid: {
-                display: false,
-                drawTicks: true,
-              },
-              ticks: {
-                color: "#6C7383",
-                display:true,
-                beginAtZero: false,
-                steps: 100,
-                stepValue: 5,
-                max: 150,
-                font: {
-                  size: 10,
-                }
-              },
+              title: { display: true, text: 'Total Opportunity (sq ft)' },
+              ticks: { color: '#6C7383', font: { size: 10 } }
             },
             y: {
-              beginAtZero: true,
-              border: {
-                display: false
-              },
-              grid: {
-                display:false,
-              },
-              ticks: {
-                color: "#6C7383",
-                beginAtZero: false,
-                stepsize:10,
-                display:true,
-                font: {
-                  size: 10,
-                }
-              },
+              title: { display: true, text: 'City' },
+              ticks: { color: '#6C7383', font: { size: 10 } }
             }
           },
           plugins: {
             legend: {
-                display: false,
-                labels: {
-                    color: 'rgb(255, 99, 132)'
-                }
+              display: false
             }
           }
-        },
+        }
       });
-
     }
 
     if ($("#expense-chart").length) {
