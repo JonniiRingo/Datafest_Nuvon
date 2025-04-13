@@ -147,3 +147,22 @@ st.dataframe(ccdm.head())
 ccdm = pd.read_csv("ccdm_collapsed_data.csv")
 st.subheader("Collapsed Symbolic Manifold Data Preview")
 st.dataframe(ccdm.head())
+
+# --- An attempt to make website more dashboardy ---
+# YOU CAN DELETE EVERYTHING BELOW THIS 
+# Sidebar: add a filter for Year based on the merged data
+years = final_data_ccdm_ready['year'].unique()
+selected_year = st.sidebar.selectbox("Select Year", sorted(years))
+st.sidebar.markdown("## Filtered Metrics")
+
+# Calculate some metrics
+st.sidebar.metric("filler filler", "100%")
+
+st.sidebar.markdown("## filler chart")
+
+fig2, ax2 = plt.subplots()
+ax2.bar("filler", "filler")
+ax2.set_xlabel("filler")
+ax2.set_ylabel("filler filler")
+ax2.set_title("filler filler filler filler")
+st.sidebar.pyplot(fig2)
