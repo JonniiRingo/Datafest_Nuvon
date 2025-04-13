@@ -84,6 +84,42 @@
 
     }
 
+    // Example: Avg available space per market over time
+    fetch('assets/data/ccdm_sorted_for_visuals.csv')
+    .then(response => response.text())
+    .then(text => {
+      const rows = text.trim().split('\n').slice(1);
+      const cityMap = {};
+
+      rows.forEach(row => {
+        const cols = row.split(',');
+        const city = cols[1];
+        const avail = parseFloat(cols[6]);
+
+        if (!cityMap[city]) cityMap[city] = [];
+        cityMap[city].push(avail);
+      });
+
+      const labels = Object.keys(cityMap);
+      const values = labels.map(city => {
+        const arr = cityMap[city];
+        return arr.reduce((a, b) => a + b, 0) / arr.length;
+      });
+
+      const ctx = document.getElementById('sales-chart-a').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Avg Available Space',
+            data: values,
+            backgroundColor: '#2981d7',
+          }]
+        }
+      });
+    });
+
     if ($("#sales-chart-a").length) {
       const ctx = document.getElementById('sales-chart-a');
       new Chart(ctx, {
