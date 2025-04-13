@@ -24686,7 +24686,7 @@ dl li {
   width: calc(236px + 0.5rem);
   height: 4.062rem;
 }
-@media (max-width: 991px) {
+@media (max-width: 480px) {
   .navbar-breadcrumb .navbar-links-wrapper {
     width: 0;
   }
@@ -24694,7 +24694,7 @@ dl li {
 .navbar-breadcrumb .navbar-links-wrapper .nav-link {
   display: none;
 }
-@media (min-width: 991px) {
+@media (min-width: 480px) {
   .navbar-breadcrumb .navbar-links-wrapper .nav-link {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -24726,7 +24726,7 @@ dl li {
   width: calc(100% - 236px - 0.5rem);
   height: 4.062rem;
 }
-@media (max-width: 991px) {
+@media (max-width: 480) {
   .navbar-breadcrumb .navbar-menu-wrapper {
     width: 100%;
     padding-left: 15px;
